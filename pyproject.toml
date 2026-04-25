@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "suk"
-version = "1.0.0"
+version = "1.0.1"
 description = "Disposable temp-mail inbox straight from your terminal"
 readme = "README.md"
 license = { text = "MIT" }
@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
-otp = "otp.cli:main"
+suk = "suk.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/forshaur/suk"
