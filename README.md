@@ -1,8 +1,12 @@
-# suk (single use key)
+# suk 
+
 
 A tiny CLI that spins up a disposable email inbox in your terminal — handy for catching OTPs and verification codes without touching a browser.
 
-<img width="596" height="184" alt="Screenshot" src="https://github.com/user-attachments/assets/b7837cab-e3d1-400b-b934-7e83872ce0a3" />
+
+
+<img width="400" height="348" alt="Screencast" src="https://github.com/user-attachments/assets/dda54a68-69b3-449e-b7dd-db4780548284" />
+
 
 
 ## Install
