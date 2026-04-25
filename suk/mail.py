@@ -93,7 +93,7 @@ def listen(token, mailbox):
                 continue
 
             if r.status_code in (401, 403):
-                print("Session expired. Run `otp --new` to get a fresh address.")
+                print("Session expired. Run `suk --new` to get a fresh address.")
                 break
 
             if r.status_code == 200:

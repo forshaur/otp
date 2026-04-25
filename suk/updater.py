@@ -5,12 +5,12 @@ from importlib.metadata import version as pkg_version, PackageNotFoundError
 
 import requests as _requests
 
-PYPI_URL = "https://pypi.org/pypi/otp/json"
+PYPI_URL = "https://pypi.org/pypi/suk/json"
 
 
 def _current_version():
     try:
-        return pkg_version("otp")
+        return pkg_version("suk")
     except PackageNotFoundError:
         return None
 
@@ -31,11 +31,11 @@ def _do_upgrade():
         print(f"  ↑ New version available ({current} → {latest}), upgrading...")
         try:
             subprocess.check_call(
-                [sys.executable, "-m", "pip", "install", "--upgrade", "otp"],
+                [sys.executable, "-m", "pip", "install", "--upgrade", "suk"],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )
-            print(f"  ✓ Upgraded to {latest}. Restart otp to use the new version.\n")
+            print(f"  ✓ Upgraded to {latest}. Restart suk to use the new version.\n")
         except Exception:
             pass
 

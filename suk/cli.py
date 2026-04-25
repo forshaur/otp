@@ -1,22 +1,22 @@
 """
-otp — disposable inbox in your terminal.
+suk — disposable inbox in your terminal.
 
 Usage:
-    otp           use saved inbox (creates one if none exists)
-    otp --new     burn the old address, get a fresh one
-    otp --version print version and exit
+    suk           use saved inbox (creates one if none exists)
+    suk --new     burn the old address, get a fresh one
+    suk --version print version and exit
 """
 
 import sys
 from importlib.metadata import version as pkg_version, PackageNotFoundError
 
-from otp.mail import create_mailbox, listen, load_saved_mailbox
-from otp.updater import check_for_updates
+from suk.mail import create_mailbox, listen, load_saved_mailbox
+from suk.updater import check_for_updates
 
 
 def _get_version():
     try:
-        return pkg_version("otp")
+        return pkg_version("suk")
     except PackageNotFoundError:
         return "unknown"
 
@@ -25,7 +25,7 @@ def main():
     args = sys.argv[1:]
 
     if "--version" in args or "-v" in args:
-        print(f"otp {_get_version()}")
+        print(f"suk {_get_version()}")
         return
 
     update_thread = check_for_updates()
