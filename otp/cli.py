@@ -8,20 +8,26 @@ Usage:
 """
 
 import sys
+from importlib.metadata import version as pkg_version, PackageNotFoundError
 
-from otp import __version__
 from otp.mail import create_mailbox, listen, load_saved_mailbox
 from otp.updater import check_for_updates
+
+
+def _get_version():
+    try:
+        return pkg_version("otp")
+    except PackageNotFoundError:
+        return "unknown"
 
 
 def main():
     args = sys.argv[1:]
 
     if "--version" in args or "-v" in args:
-        print(f"otp {__version__}")
+        print(f"otp {_get_version()}")
         return
 
-    # kick off update check early — it runs in the background
     update_thread = check_for_updates()
 
     if "--new" in args or "-n" in args:
@@ -34,9 +40,7 @@ def main():
             print("No saved inbox found, creating one...")
             token, mailbox = create_mailbox()
 
-    # give the update thread a moment to print its message before we print ours
     update_thread.join(timeout=1.5)
-
     listen(token, mailbox)
 
 

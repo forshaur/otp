@@ -1,17 +1,18 @@
-"""
-Auto-upgrade helper. Checks PyPI for a newer version and re-installs if found.
-Runs silently in the background on every invocation.
-"""
-
 import subprocess
 import sys
 import threading
+from importlib.metadata import version as pkg_version, PackageNotFoundError
 
 import requests as _requests
 
-from otp import __version__
-
 PYPI_URL = "https://pypi.org/pypi/otp/json"
+
+
+def _current_version():
+    try:
+        return pkg_version("otp")
+    except PackageNotFoundError:
+        return None
 
 
 def _fetch_latest():
@@ -24,9 +25,10 @@ def _fetch_latest():
 
 
 def _do_upgrade():
+    current = _current_version()
     latest = _fetch_latest()
-    if latest and latest != __version__:
-        print(f"  ↑ New version available ({__version__} → {latest}), upgrading...")
+    if current and latest and latest != current:
+        print(f"  ↑ New version available ({current} → {latest}), upgrading...")
         try:
             subprocess.check_call(
                 [sys.executable, "-m", "pip", "install", "--upgrade", "otp"],
@@ -35,11 +37,10 @@ def _do_upgrade():
             )
             print(f"  ✓ Upgraded to {latest}. Restart otp to use the new version.\n")
         except Exception:
-            pass  # non-fatal, carry on
+            pass
 
 
 def check_for_updates():
-    """Fire off the update check in a daemon thread so it doesn't block startup."""
     t = threading.Thread(target=_do_upgrade, daemon=True)
     t.start()
     return t
