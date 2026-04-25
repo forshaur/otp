@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "suk"
-version = "1.0.1"
+version = "1.0.3"
 description = "Disposable temp-mail inbox straight from your terminal"
 readme = "README.md"
 license = { text = "MIT" }
@@ -23,4 +23,4 @@ Homepage = "https://github.com/forshaur/suk"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["otp*"]
+include = ["suk*"]
