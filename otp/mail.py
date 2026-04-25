@@ -7,6 +7,13 @@ from curl_cffi import requests
 
 DATA_FILE = Path.home() / ".otp_mailbox.json"
 
+# ANSI colors
+CYAN   = "\033[96m"
+GREEN  = "\033[92m"
+YELLOW = "\033[93m"
+BOLD   = "\033[1m"
+RESET  = "\033[0m"
+
 HEADERS_BASE = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:149.0) Gecko/20100101 Firefox/149.0",
     "Accept": "*/*",
@@ -68,8 +75,8 @@ def load_saved_mailbox():
 
 def listen(token, mailbox):
     """Poll the inbox every 2s and print anything new."""
-    print(f"\n  Email  →  {mailbox}")
-    print("  Waiting for messages... (Ctrl+C to quit)\n")
+    print(f"\n  Email  →  {BOLD}{CYAN}{mailbox}{RESET}")
+    print(f"  Waiting for messages... (Ctrl+C to quit)\n")
 
     seen = set()
 
@@ -82,7 +89,6 @@ def listen(token, mailbox):
                     impersonate="firefox",
                 )
             except Exception:
-                # network blip — just retry
                 time.sleep(3)
                 continue
 
@@ -104,8 +110,8 @@ def listen(token, mailbox):
 
 
 def _print_message(msg):
-    print("-" * 52)
-    print(f"  From    : {msg.get('from', '—')}")
-    print(f"  Subject : {msg.get('subject', '(no subject)')}")
-    print(f"  Preview : {msg.get('bodyPreview', '').strip()}")
-    print("-" * 52 + "\n")
+    print(f"{YELLOW}{'─' * 52}{RESET}")
+    print(f"  {BOLD}From{RESET}    : {msg.get('from', '—')}")
+    print(f"  {BOLD}Subject{RESET} : {GREEN}{msg.get('subject', '(no subject)')}{RESET}")
+    print(f"  {BOLD}Preview{RESET} : {msg.get('bodyPreview', '').strip()}")
+    print(f"{YELLOW}{'─' * 52}{RESET}\n")
