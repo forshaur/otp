@@ -1,6 +1,7 @@
 # otp
 
 A tiny CLI that spins up a disposable email inbox in your terminal — handy for catching OTPs and verification codes without touching a browser.
+<img width="596" height="184" alt="Screenshot" src="https://github.com/user-attachments/assets/ec67a5b4-3e86-46d4-bcd7-5c35d03c57e8" />
 
 ## Install
 
